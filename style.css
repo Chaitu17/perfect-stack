@@ -1,0 +1,544 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Outfit:wght@300;500;700;900&family=Permanent+Marker&display=swap');
+
+/* =============================================
+   CSS VARIABLES & THEME DEFINITIONS
+   ============================================= */
+:root {
+    --font-main: 'Outfit', sans-serif;
+    --font-display: 'Bangers', cursive;
+    --font-quirky: 'Permanent Marker', cursive;
+
+    /* Dystopian */
+    --bg-image-dystopian: url('dystopian.png');
+    --overlay-dystopian: linear-gradient(135deg, rgba(10, 0, 30, 0.55) 0%, rgba(5, 0, 20, 0.4) 100%);
+    --accent-dystopian: #00ffff;
+    --accent2-dystopian: #ff00cc;
+    --text-dystopian: #e0f7ff;
+    --glow-dystopian: 0 0 20px #00ffff, 0 0 40px #ff00cc;
+
+    /* Ancient Temple */
+    --bg-image-ancient: url('ancient_temple.png');
+    --overlay-ancient: linear-gradient(135deg, rgba(20, 10, 0, 0.55) 0%, rgba(0, 20, 10, 0.4) 100%);
+    --accent-ancient: #f1c40f;
+    --accent2-ancient: #e67e22;
+    --text-ancient: #fff8e1;
+    --glow-ancient: 0 0 20px #f1c40f, 0 0 40px #e67e22;
+
+    /* Deserted */
+    --bg-image-deserted: url('deserted.png');
+    --overlay-deserted: linear-gradient(135deg, rgba(30, 10, 0, 0.5) 0%, rgba(20, 5, 0, 0.35) 100%);
+    --accent-deserted: #ff9f43;
+    --accent2-deserted: #ee5a24;
+    --text-deserted: #fff3e0;
+    --glow-deserted: 0 0 20px #ff9f43, 0 0 40px #ee5a24;
+
+    /* Active theme defaults (dystopian) */
+    --current-accent: var(--accent-dystopian);
+    --current-accent2: var(--accent2-dystopian);
+    --current-text: var(--text-dystopian);
+    --current-glow: var(--glow-dystopian);
+}
+
+/* =============================================
+   THEME BODY CLASSES
+   ============================================= */
+body.theme-dystopian {
+    --current-accent: var(--accent-dystopian);
+    --current-accent2: var(--accent2-dystopian);
+    --current-text: var(--text-dystopian);
+    --current-glow: var(--glow-dystopian);
+}
+
+body.theme-ancient {
+    --current-accent: var(--accent-ancient);
+    --current-accent2: var(--accent2-ancient);
+    --current-text: var(--text-ancient);
+    --current-glow: var(--glow-ancient);
+}
+
+body.theme-deserted {
+    --current-accent: var(--accent-deserted);
+    --current-accent2: var(--accent2-deserted);
+    --current-text: var(--text-deserted);
+    --current-glow: var(--glow-deserted);
+}
+
+/* =============================================
+   BASE
+   ============================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: var(--font-main);
+    user-select: none;
+    touch-action: none;
+}
+
+/* =============================================
+   GAME CONTAINER & CANVAS
+   ============================================= */
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Background layer — swapped via JS class on #game-container */
+#game-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 0.8s ease;
+    z-index: 0;
+}
+
+#game-container.bg-dystopian::before {
+    background-image: var(--overlay-dystopian), var(--bg-image-dystopian);
+}
+
+#game-container.bg-ancient::before {
+    background-image: var(--overlay-ancient), var(--bg-image-ancient);
+}
+
+#game-container.bg-deserted::before {
+    background-image: var(--overlay-deserted), var(--bg-image-deserted);
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* =============================================
+   UI LAYER
+   ============================================= */
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+/* =============================================
+   SCREENS (Start / Game Over)
+   ============================================= */
+.screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(14px) saturate(1.5);
+    -webkit-backdrop-filter: blur(14px) saturate(1.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 10;
+    padding: 2rem;
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* =============================================
+   START SCREEN — LANDING PAGE
+   ============================================= */
+
+/* Animated shimmer badge */
+.game-badge {
+    font-family: var(--font-quirky);
+    font-size: 0.95rem;
+    color: var(--current-accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    opacity: 0.85;
+    animation: pulse-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+/* Main title */
+h1 {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 7rem);
+    margin: 0 0 0.1rem;
+    line-height: 1;
+    color: #fff;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    text-shadow: var(--current-glow), 4px 4px 0px var(--current-accent2);
+    animation: title-wobble 3s ease-in-out infinite;
+    position: relative;
+}
+
+@keyframes title-wobble {
+
+    0%,
+    100% {
+        transform: rotate(-1deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(1deg) scale(1.02);
+    }
+}
+
+/* Subtitle tagline */
+.tagline {
+    font-family: var(--font-quirky);
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    color: var(--current-accent);
+    margin: 0.3rem 0 1.8rem;
+    text-align: center;
+    text-shadow: 0 0 12px var(--current-accent);
+    animation: flicker 4s ease-in-out infinite;
+}
+
+@keyframes flicker {
+
+    0%,
+    90%,
+    100% {
+        opacity: 1;
+    }
+
+    92% {
+        opacity: 0.4;
+    }
+
+    94% {
+        opacity: 1;
+    }
+
+    96% {
+        opacity: 0.3;
+    }
+
+    98% {
+        opacity: 1;
+    }
+}
+
+/* Theme selector */
+.theme-selector {
+    margin-bottom: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.theme-label {
+    font-family: var(--font-quirky);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 1px;
+}
+
+/* Theme pill buttons */
+.theme-pills {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.theme-pill {
+    padding: 0.45rem 1.1rem;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.5px;
+    pointer-events: auto;
+}
+
+.theme-pill:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: var(--current-accent);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.theme-pill.active {
+    background: var(--current-accent);
+    border-color: var(--current-accent);
+    color: #000;
+    box-shadow: 0 0 16px var(--current-accent);
+    transform: translateY(-2px);
+}
+
+/* Start button */
+#start-btn {
+    padding: 1rem 3.5rem;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 3px;
+    color: #000;
+    background: var(--current-accent);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 30px var(--current-accent), 0 6px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s, background 0.4s;
+    pointer-events: auto;
+    animation: btn-pulse 2s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+#start-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 60%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.25);
+    transform: skewX(-20deg);
+    animation: btn-shine 3s ease-in-out infinite;
+}
+
+@keyframes btn-shine {
+    0% {
+        left: -60%;
+    }
+
+    60%,
+    100% {
+        left: 120%;
+    }
+}
+
+@keyframes btn-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px var(--current-accent), 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 40px var(--current-accent), 0 0 60px var(--current-accent2), 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+}
+
+#start-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+#start-btn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+/* Hint text */
+.hint-text {
+    margin-top: 1.2rem;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 1px;
+    animation: hint-blink 2s ease-in-out infinite;
+}
+
+@keyframes hint-blink {
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* =============================================
+   GAME OVER SCREEN
+   ============================================= */
+h2 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    color: var(--current-accent);
+    margin: 0 0 0.3rem;
+    letter-spacing: 4px;
+    text-shadow: var(--current-glow);
+    animation: title-wobble 2s ease-in-out infinite;
+}
+
+.game-over-sub {
+    font-family: var(--font-quirky);
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.5rem;
+}
+
+#final-score {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    color: #fff;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    letter-spacing: 2px;
+}
+
+#restart-btn {
+    padding: 0.9rem 3rem;
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    color: #000;
+    background: var(--current-accent);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 25px var(--current-accent), 0 6px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+    pointer-events: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+#restart-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 60%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.25);
+    transform: skewX(-20deg);
+    animation: btn-shine 3s ease-in-out infinite;
+}
+
+#restart-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 40px var(--current-accent), 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+#restart-btn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+/* =============================================
+   SCORE DISPLAY
+   ============================================= */
+#score-container {
+    position: absolute;
+    top: 8%;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 7rem);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.35);
+    z-index: 5;
+    pointer-events: none;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+    letter-spacing: 4px;
+}
+
+#score-container.bump {
+    transform: scale(1.25) rotate(-3deg);
+    color: rgba(255, 255, 255, 0.75);
+    text-shadow: var(--current-glow);
+}
+
+/* =============================================
+   PERFECT MESSAGE
+   ============================================= */
+#perfect-message {
+    position: absolute;
+    top: 40%;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 400;
+    color: var(--current-accent);
+    opacity: 0;
+    transform: scale(0.5) rotate(-5deg);
+    transition: opacity 0.25s, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-shadow: var(--current-glow);
+    letter-spacing: 4px;
+    pointer-events: none;
+}
+
+#perfect-message.show {
+    opacity: 1;
+    transform: scale(1.4) rotate(3deg);
+}
+
+/* =============================================
+   FLOATING PARTICLES (decorative, CSS-only)
+   ============================================= */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float-particle linear infinite;
+    opacity: 0;
+}
+
+@keyframes float-particle {
+    0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.6;
+    }
+
+    90% {
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translateY(-20vh) scale(1.5);
+        opacity: 0;
+    }
+}

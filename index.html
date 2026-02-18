@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Perfect Stack — Drop. Stack. Dominate.</title>
+    <meta name="description"
+        content="Perfect Stack: a precision block-stacking game. Tap to drop, stack perfectly, and rise to the top!">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="theme-dystopian">
+    <div id="game-container" class="bg-dystopian">
+        <canvas id="game-canvas"></canvas>
+
+        <div id="ui-layer">
+            <div id="score-container">0</div>
+
+            <!-- ===== START SCREEN ===== -->
+            <div id="start-screen" class="screen active">
+
+                <div class="game-badge">⚡ Precision Stacking Game ⚡</div>
+
+                <h1>PERFECT<br>STACK</h1>
+
+                <p class="tagline">Drop it. Stack it. Don't blow it. 🏗️</p>
+
+                <div class="theme-selector">
+                    <div class="theme-label">🎨 Pick your vibe</div>
+                    <div class="theme-pills">
+                        <button class="theme-pill active" data-theme="dystopian" id="pill-dystopian">⚡
+                            Dystopian</button>
+                        <button class="theme-pill" data-theme="ancient" id="pill-ancient">🏛️ Ancient Temple</button>
+                        <button class="theme-pill" data-theme="deserted" id="pill-deserted">🏜️ Deserted</button>
+                    </div>
+                </div>
+
+                <button id="start-btn">LET'S GO! 🚀</button>
+
+                <p class="hint-text">tap · click · spacebar to drop</p>
+            </div>
+
+            <!-- ===== GAME OVER SCREEN ===== -->
+            <div id="game-over-screen" class="screen">
+                <h2>OOPS! 💥</h2>
+                <p class="game-over-sub">You missed that one, champ.</p>
+                <p id="final-score">Score: 0</p>
+                <button id="restart-btn">TRY AGAIN 🔥</button>
+            </div>
+
+            <div id="perfect-message">PERFECT! ✨</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
