@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://chaitu17.github.io/perfect-stack/sitemap.xml
+Sitemap: https://perfectstack.site/sitemap.xml
