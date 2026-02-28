@@ -75,10 +75,213 @@ body.theme-deserted {
 body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow-y: auto;
+    /* game is 100vh; info section scrolls below */
     font-family: var(--font-main);
     user-select: none;
-    touch-action: none;
+}
+
+/* =============================================
+   INFO SECTION (below game canvas)
+   ============================================= */
+#info-section {
+    background: #060612;
+    padding: 3rem 1.5rem 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.ad-slot {
+    max-width: 900px;
+    margin: 0 auto 2.5rem;
+    min-height: 90px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.info-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: border-color 0.3s ease;
+}
+
+.info-card:hover {
+    border-color: rgba(0, 255, 255, 0.3);
+}
+
+.info-card h2 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--current-accent, #00ffff);
+    margin: 0 0 1.4rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 16px var(--current-accent, #00ffff);
+}
+
+.info-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 1.5rem 0 0.7rem;
+    letter-spacing: 1px;
+}
+
+.info-card p {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0 0 0.8rem;
+}
+
+/* Steps list (numbered how-to) */
+.steps-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: steps;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.steps-list li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    counter-increment: steps;
+}
+
+.step-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.steps-list li>div strong {
+    display: block;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.3px;
+}
+
+.steps-list li>div p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.6;
+}
+
+kbd {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+    font-size: 0.85em;
+    font-family: monospace;
+    color: #fff;
+}
+
+/* Theme list */
+.theme-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.theme-list li {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid rgba(0, 255, 255, 0.3);
+    padding-left: 0.8rem;
+}
+
+.theme-list li strong {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Tips list */
+.tips-list {
+    padding-left: 1.4rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tips-list li {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+#site-footer {
+    background: #04040e;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    text-align: center;
+    padding: 1.8rem 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: rgba(0, 255, 255, 0.75);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #00ffff;
+}
+
+.footer-sep {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 0.9rem;
+}
+
+.footer-copy {
+    margin: 0;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.25);
 }
 
 /* =============================================

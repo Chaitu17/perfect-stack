@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index, follow">
 
     <!-- ── Primary SEO ── -->
     <title>Perfect Stack – Free Online Block Stacking Game (No Download)</title>
@@ -16,6 +17,11 @@
 
     <!-- ── Canonical ── -->
     <link rel="canonical" href="https://perfectstack.site/">
+
+    <!-- ── Preconnect (performance) ── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
 
     <!-- ── Favicon (emoji SVG, no extra file needed) ── -->
     <link rel="icon"
@@ -65,9 +71,22 @@
     <link rel="stylesheet" href="style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9856644873980533"
         crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Perfect Stack – Privacy Policy",
+      "url": "https://perfectstack.site/privacy.html"
+    }
+    </script>
 </head>
 
 <body class="theme-dystopian">
+    <noscript>
+        <div style="background:#0d0d0d;color:#fff;text-align:center;padding:2rem;font-family:sans-serif;">
+            <strong>Perfect Stack</strong> requires JavaScript to run. Please enable JavaScript in your browser to play.
+        </div>
+    </noscript>
     <div id="game-container" class="bg-dystopian">
         <canvas id="game-canvas"></canvas>
 
@@ -111,6 +130,100 @@
     </div>
 
     <script src="script.js"></script>
+
+    <!-- ===== INFO SECTION (scrollable, below game) ===== -->
+    <section id="info-section" aria-label="About Perfect Stack">
+
+        <!-- AdSense Ad Unit -->
+        <div class="ad-slot" aria-label="Advertisement">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9856644873980533" data-ad-slot="auto"
+                data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <div class="info-grid">
+
+            <!-- How to Play -->
+            <div class="info-card" id="how-to-play">
+                <h2>🎮 How to Play</h2>
+                <ol class="steps-list">
+                    <li>
+                        <span class="step-icon">👆</span>
+                        <div>
+                            <strong>Choose Your Vibe</strong>
+                            <p>Pick from three stunning themes — Dystopian, Ancient Temple, or Deserted. Each has its
+                                own visual style and block colours.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-icon">🏗️</span>
+                        <div>
+                            <strong>Drop the Block</strong>
+                            <p>Tap, click, or press <kbd>Space</kbd> to drop the sliding block onto the stack below. The
+                                closer to perfect alignment, the better!</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-icon">✂️</span>
+                        <div>
+                            <strong>Don't Miss</strong>
+                            <p>If you miss slightly, the block gets trimmed — your tower gets narrower. Miss completely
+                                and it's game over. How high can you stack?</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-icon">⚡</span>
+                        <div>
+                            <strong>Perfect Stacks Reward You</strong>
+                            <p>Land a block perfectly aligned and get a satisfying chord chime, a flash of colour, and
+                                an extra speed boost. Chain them for glory!</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- About -->
+            <div class="info-card" id="about">
+                <h2>🏛️ About Perfect Stack</h2>
+                <p>Perfect Stack is a free, browser-based precision block-stacking arcade game. No download, no sign-up
+                    — just pure stacking action. Built for desktop and mobile alike.</p>
+                <p>The game is inspired by classic stacking arcade titles, reimagined with modern web technology (HTML5
+                    Canvas, Web Audio API) and three immersive visual themes:</p>
+                <ul class="theme-list">
+                    <li><strong>⚡ Dystopian</strong> — neon-lit cyberpunk cityscape with glowing cyan and magenta
+                        windows.</li>
+                    <li><strong>🏛️ Ancient Temple</strong> — warm stone and gold tones evoking ruins of a lost
+                        civilisation.</li>
+                    <li><strong>🏜️ Deserted</strong> — scorched terracotta reds and burnt orange under a desert sun.
+                    </li>
+                </ul>
+                <p>Perfect Stack is developed and maintained by <strong>Chaitu17</strong>. It runs entirely in your
+                    browser — no tracking, no accounts, no data collected by the game itself.</p>
+
+                <h3>Tips &amp; Tricks</h3>
+                <ul class="tips-list">
+                    <li>The block speeds up as your score climbs — stay focused!</li>
+                    <li>Perfect drops keep your tower width intact. Prioritise precision over speed.</li>
+                    <li>Use keyboard spacebar for the most precise timing on desktop.</li>
+                    <li>The block bounces back from the edge — watch the rhythm and drop at the peak.</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="site-footer">
+        <div class="footer-links">
+            <a href="/privacy.html">Privacy Policy</a>
+            <span class="footer-sep">·</span>
+            <a href="/#about">About</a>
+            <span class="footer-sep">·</span>
+            <a href="/#how-to-play">How to Play</a>
+        </div>
+        <p class="footer-copy">&copy; 2026 Perfect Stack by Chaitu17. All rights reserved.</p>
+    </footer>
+
 </body>
 
 </html>
