@@ -82,75 +82,233 @@ body {
 }
 
 /* =============================================
-   INFO SECTION (below game canvas)
+   FIXED PRIVACY LINK (always visible over game)
    ============================================= */
-#info-section {
-    background: #060612;
-    padding: 3rem 1.5rem 2rem;
-    position: relative;
-    z-index: 10;
+#privacy-link {
+    position: fixed;
+    bottom: 0.75rem;
+    right: 1rem;
+    z-index: 9999;
+    font-family: var(--font-main);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    letter-spacing: 0.4px;
+    transition: color 0.2s ease, background 0.2s ease;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    pointer-events: auto;
 }
 
-.ad-slot {
-    max-width: 900px;
-    margin: 0 auto 2.5rem;
-    min-height: 90px;
+#privacy-link:hover {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+/* =============================================
+   FLOATING ACTION BUTTONS (bottom-left, always visible)
+   ============================================= */
+#floating-btns {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    pointer-events: auto;
+}
+
+.floating-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1.5px solid rgba(255, 255, 255, 0.22);
     border-radius: 10px;
+    padding: 0.55rem 1.1rem;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.82);
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: all 0.22s ease;
+    white-space: nowrap;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+.floating-btn:hover {
+    background: rgba(0, 255, 255, 0.14);
+    border-color: var(--current-accent, #00ffff);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 14px var(--current-accent, #00ffff), 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.floating-btn:active {
+    transform: translateY(0px) scale(0.97);
+}
+
+/* =============================================
+   INFO DRAWER (slide-up panel)
+   ============================================= */
+#info-drawer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    max-height: 80vh;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.03);
 }
 
-.info-grid {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+#info-drawer.open {
+    transform: translateY(0);
 }
 
-@media (max-width: 768px) {
-    .info-grid {
-        grid-template-columns: 1fr;
-    }
+#info-drawer-inner {
+    background: rgba(6, 6, 22, 0.97);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 20px 20px 0 0;
+    padding: 1.5rem 2rem 2rem;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
 }
 
-.info-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 16px;
-    padding: 2rem;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: border-color 0.3s ease;
+#info-drawer-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    line-height: 1;
 }
 
-.info-card:hover {
-    border-color: rgba(0, 255, 255, 0.3);
+#info-drawer-close:hover {
+    background: rgba(255, 0, 0, 0.25);
+    color: #fff;
 }
 
-.info-card h2 {
-    font-family: var(--font-display);
-    font-size: 1.8rem;
-    color: var(--current-accent, #00ffff);
-    margin: 0 0 1.4rem;
-    letter-spacing: 2px;
-    text-shadow: 0 0 16px var(--current-accent, #00ffff);
+/* Drawer tabs */
+.drawer-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.8rem;
 }
 
-.info-card h3 {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
+.drawer-tab {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.45rem 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+}
+
+.drawer-tab:hover {
+    border-color: var(--current-accent, #00ffff);
     color: rgba(255, 255, 255, 0.85);
-    margin: 1.5rem 0 0.7rem;
+}
+
+.drawer-tab.active {
+    background: var(--current-accent, #00ffff);
+    border-color: var(--current-accent, #00ffff);
+    color: #000;
+    box-shadow: 0 0 14px var(--current-accent, #00ffff);
+}
+
+/* Drawer panels */
+.drawer-panel {
+    display: none;
+}
+
+.drawer-panel.active {
+    display: block;
+}
+
+.drawer-tips {
+    margin-top: 1.4rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.drawer-tips h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 0.6rem;
     letter-spacing: 1px;
 }
 
-.info-card p {
-    color: rgba(255, 255, 255, 0.65);
-    font-size: 0.95rem;
+.drawer-panel p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.92rem;
     line-height: 1.7;
     margin: 0 0 0.8rem;
 }
+
+.drawer-privacy-note {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    font-size: 0.78rem !important;
+    color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.drawer-privacy-note a {
+    color: rgba(0, 255, 255, 0.65);
+    text-decoration: underline;
+}
+
+/* Ad slot — no forced height; invisible when no ad loads */
+.ad-slot {
+    margin: 1rem 0 0;
+    overflow: hidden;
+}
+
+/* Backdrop */
+#info-drawer-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 9999;
+    backdrop-filter: blur(2px);
+}
+
+#info-drawer-backdrop.open {
+    display: block;
+}
+
+
 
 /* Steps list (numbered how-to) */
 .steps-list {
