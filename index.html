@@ -33,7 +33,7 @@
     <meta property="og:title" content="Perfect Stack – Free Online Block Stacking Game (No Download)">
     <meta property="og:description"
         content="Play Perfect Stack – a free, no-download online block stacking game. Tap to drop, stack perfectly, and beat your high score!">
-    <meta property="og:image" content="https://perfectstack.site/dystopian.png">
+    <meta property="og:image" content="https://perfectstack.site/assets/images/dystopian.png">
     <meta property="og:site_name" content="Perfect Stack">
 
     <!-- ── Twitter Card ── -->
@@ -42,7 +42,7 @@
     <meta name="twitter:title" content="Perfect Stack – Free Online Block Stacking Game (No Download)">
     <meta name="twitter:description"
         content="Play Perfect Stack – a free, no-download online block stacking game. Tap to drop, stack perfectly, and beat your high score!">
-    <meta name="twitter:image" content="https://perfectstack.site/dystopian.png">
+    <meta name="twitter:image" content="https://perfectstack.site/assets/images/dystopian.png">
 
     <!-- ── JSON-LD Structured Data ── -->
     <script type="application/ld+json">
@@ -55,7 +55,7 @@
       "applicationCategory": "Game",
       "operatingSystem": "Web",
       "url": "https://perfectstack.site/",
-      "image": "https://perfectstack.site/dystopian.png",
+      "image": "https://perfectstack.site/assets/images/dystopian.png",
       "author": {
         "@type": "Person",
         "name": "Chaitu17"
@@ -87,34 +87,90 @@
             <strong>Perfect Stack</strong> requires JavaScript to run. Please enable JavaScript in your browser to play.
         </div>
     </noscript>
+
     <div id="game-container" class="bg-dystopian">
         <canvas id="game-canvas"></canvas>
 
         <div id="ui-layer">
             <div id="score-container">0</div>
 
-            <!-- ===== START SCREEN ===== -->
+            <!-- ===== START SCREEN (Scrollable Menu) ===== -->
             <div id="start-screen" class="screen active">
+                <div class="start-screen-content">
 
-                <div class="game-badge">⚡ Precision Stacking Game ⚡</div>
-
-                <h1>PERFECT<br>STACK</h1>
-
-                <p class="tagline">Drop it. Stack it. Don't blow it. 🏗️</p>
-
-                <div class="theme-selector">
-                    <div class="theme-label">🎨 Pick your vibe</div>
-                    <div class="theme-pills">
-                        <button class="theme-pill active" data-theme="dystopian" id="pill-dystopian">⚡
-                            Dystopian</button>
-                        <button class="theme-pill" data-theme="ancient" id="pill-ancient">🏛️ Ancient Temple</button>
-                        <button class="theme-pill" data-theme="deserted" id="pill-deserted">🏜️ Deserted</button>
+                    <!-- Left: How to Play -->
+                    <div class="start-info-panel hide-on-mobile">
+                        <h2>🎮 How to Play</h2>
+                        <ol class="steps-list">
+                            <li><span class="step-icon">👆</span> <strong>Choose Vibe</strong> Pick your theme.</li>
+                            <li><span class="step-icon">🏗️</span> <strong>Drop Block</strong> Tap, click, or Spacebar.
+                            </li>
+                            <li><span class="step-icon">✂️</span> <strong>Don't Miss</strong> Miss completely = game
+                                over.</li>
+                            <li><span class="step-icon">⚡</span> <strong>Perfect Stacks</strong> Reward speed and score!
+                            </li>
+                        </ol>
                     </div>
+
+                    <!-- Center: Main Play Area -->
+                    <div class="start-center-panel">
+                        <div class="game-badge">⚡ Precision Stacking Game ⚡</div>
+                        <h1>PERFECT<br>STACK</h1>
+                        <p class="tagline">Drop it. Stack it. Don't blow it. 🏗️</p>
+
+                        <div class="theme-selector">
+                            <div class="theme-label">🎨 Pick your vibe</div>
+                            <div class="theme-pills">
+                                <button class="theme-pill active" data-theme="dystopian" id="pill-dystopian">⚡
+                                    Dystopian</button>
+                                <button class="theme-pill" data-theme="ancient" id="pill-ancient">🏛️ Ancient
+                                    Temple</button>
+                                <button class="theme-pill" data-theme="deserted" id="pill-deserted">🏜️
+                                    Deserted</button>
+                            </div>
+                        </div>
+
+                        <button id="start-btn">LET'S GO! 🚀</button>
+                        <p class="hint-text">tap · click · spacebar to drop</p>
+
+                        <!-- Mobile Only Information -->
+                        <div class="mobile-only-info">
+                            <h3>🎮 How to Play</h3>
+                            <p>Tap to drop blocks perfectly. Don't miss!</p>
+                            <h3>🏛️ About Perfect Stack</h3>
+                            <p>A free, browser-based precision stacking arcade game.</p>
+
+                            <!-- AdSense (Mobile Place) -->
+                            <div class="ad-slot top-ad" aria-label="Advertisement">
+                                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9856644873980533"
+                                    data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: About & Ads -->
+                    <div class="start-info-panel hide-on-mobile">
+                        <h2>🏛️ About Perfect Stack</h2>
+                        <p>Perfect Stack is a free, browser-based precision block-stacking arcade game. Built with HTML5
+                            Canvas and Web Audio API.</p>
+                        <p>Developed by <strong>Chaitu17</strong>. Runs entirely in your browser.</p>
+
+                        <!-- AdSense Ad Unit -->
+                        <div class="ad-slot top-ad" aria-label="Advertisement">
+                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9856644873980533"
+                                data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                        </div>
+
+                        <div class="drawer-privacy-note">
+                            <p>Welcome! We respect your privacy.</p>
+                            <p>By playing, you agree to our <a href="terms.html">Terms</a> and <a
+                                    href="privacy.html">Privacy Policy</a>.</p>
+                        </div>
+                    </div>
+
                 </div>
-
-                <button id="start-btn">LET'S GO! 🚀</button>
-
-                <p class="hint-text">tap · click · spacebar to drop</p>
             </div>
 
             <!-- ===== GAME OVER SCREEN ===== -->
@@ -123,6 +179,16 @@
                 <p class="game-over-sub">You missed that one, champ.</p>
                 <p id="final-score">Score: 0</p>
                 <button id="restart-btn">TRY AGAIN 🔥</button>
+                <button id="home-btn" class="secondary-btn">🏠 MAIN MENU</button>
+
+                <div class="theme-selector game-over-theme-selector">
+                    <div class="theme-label">Switch Vibe Before Trying Again?</div>
+                    <div class="theme-pills">
+                        <button class="theme-pill active" data-theme="dystopian">⚡ Dystopian</button>
+                        <button class="theme-pill" data-theme="ancient">🏛️ Ancient Temple</button>
+                        <button class="theme-pill" data-theme="deserted">🏜️ Deserted</button>
+                    </div>
+                </div>
             </div>
 
             <div id="perfect-message">PERFECT! ✨</div>
@@ -131,147 +197,17 @@
 
     <script src="script.js"></script>
 
-    <!-- Fixed privacy link — always visible on game screen -->
-    <a href="privacy.html" id="privacy-link" aria-label="Privacy Policy">Privacy Policy</a>
-
-    <!-- Two floating action buttons — bottom-left, always visible -->
-    <div id="floating-btns">
-        <button class="floating-btn" id="btn-how-to-play" data-tab="how-to-play" aria-label="How to Play">
-            🎮 How to Play
-        </button>
-        <button class="floating-btn" id="btn-about" data-tab="about" aria-label="About">
-            🏛️ About
-        </button>
-    </div>
-
-    <!-- ===== INFO DRAWER ===== -->
-    <div id="info-drawer" role="dialog" aria-modal="true" aria-label="Game Info">
-        <div id="info-drawer-inner">
-
-            <button id="info-drawer-close" aria-label="Close">✕</button>
-
-            <!-- Tabs -->
-            <div class="drawer-tabs">
-                <button class="drawer-tab active" data-tab="how-to-play">🎮 How to Play</button>
-                <button class="drawer-tab" data-tab="about">🏛️ About</button>
-            </div>
-
-            <!-- Tab: How to Play -->
-            <div class="drawer-panel active" id="tab-how-to-play">
-                <ol class="steps-list">
-                    <li>
-                        <span class="step-icon">👆</span>
-                        <div>
-                            <strong>Choose Your Vibe</strong>
-                            <p>Pick Dystopian, Ancient Temple, or Deserted — each has its own visual style and block
-                                colours.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="step-icon">🏗️</span>
-                        <div>
-                            <strong>Drop the Block</strong>
-                            <p>Tap, click, or press <kbd>Space</kbd> to drop the sliding block. The closer to perfect
-                                alignment, the better!</p>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="step-icon">✂️</span>
-                        <div>
-                            <strong>Don't Miss</strong>
-                            <p>Miss slightly and the block trims. Miss completely and it's game over. How high can you
-                                stack?</p>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="step-icon">⚡</span>
-                        <div>
-                            <strong>Perfect Stacks Reward You</strong>
-                            <p>A perfect drop gives a chord chime, colour flash, and speed boost. Chain them for glory!
-                            </p>
-                        </div>
-                    </li>
-                </ol>
-                <div class="drawer-tips">
-                    <h3>Tips</h3>
-                    <ul class="tips-list">
-                        <li>Speed increases as your score climbs — stay focused!</li>
-                        <li>Perfect drops keep your tower width intact.</li>
-                        <li>Spacebar gives the most precise timing on desktop.</li>
-                        <li>Watch the block rhythm and drop at the peak.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Tab: About -->
-            <div class="drawer-panel" id="tab-about">
-                <p>Perfect Stack is a free, browser-based precision block-stacking arcade game. No download, no sign-up
-                    — just pure stacking action. Works on desktop and mobile.</p>
-                <p>Built with HTML5 Canvas and Web Audio API, featuring three immersive themes:</p>
-                <ul class="theme-list">
-                    <li><strong>⚡ Dystopian</strong> — neon-lit cyberpunk cityscape.</li>
-                    <li><strong>🏛️ Ancient Temple</strong> — warm stone and gold tones.</li>
-                    <li><strong>🏜️ Deserted</strong> — scorched terracotta reds and burnt orange.</li>
-                </ul>
-                <p>Developed by <strong>Chaitu17</strong>. Runs entirely in your browser — no tracking, no accounts.</p>
-
-                <!-- AdSense Ad Unit -->
-                <div class="ad-slot" aria-label="Advertisement">
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9856644873980533"
-                        data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                </div>
-
-                <p class="drawer-privacy-note">By playing, you agree to our <a href="privacy.html">Privacy Policy</a>.
-                    This site uses Google AdSense which may use cookies for personalised ads.</p>
-            </div>
-
+    <!-- ===== FOOTER ===== -->
+    <footer id="site-footer">
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <span class="footer-sep">·</span>
+            <a href="terms.html">Terms of Service</a>
+            <span class="footer-sep">·</span>
+            <a href="contact.html">Contact Us</a>
         </div>
-    </div>
-    <div id="info-drawer-backdrop"></div>
-
-    <script>
-        // Info drawer logic
-        const drawer = document.getElementById('info-drawer');
-        const backdrop = document.getElementById('info-drawer-backdrop');
-        const closeBtn = document.getElementById('info-drawer-close');
-
-        function openDrawer(tabId) {
-            // Switch to the requested tab
-            document.querySelectorAll('.drawer-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.drawer-panel').forEach(p => p.classList.remove('active'));
-            document.querySelector('.drawer-tab[data-tab="' + tabId + '"]').classList.add('active');
-            document.getElementById('tab-' + tabId).classList.add('active');
-            drawer.classList.add('open');
-            backdrop.classList.add('open');
-        }
-        function closeDrawer() {
-            drawer.classList.remove('open');
-            backdrop.classList.remove('open');
-        }
-
-        // Each floating button opens to its own tab
-        document.querySelectorAll('.floating-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                openDrawer(btn.dataset.tab);
-            });
-        });
-
-        closeBtn.addEventListener('click', closeDrawer);
-        backdrop.addEventListener('click', closeDrawer);
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
-
-        // Tab switching inside drawer
-        document.querySelectorAll('.drawer-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.drawer-tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.drawer-panel').forEach(p => p.classList.remove('active'));
-                tab.classList.add('active');
-                document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
-            });
-        });
-    </script>
+        <p class="footer-copy">&copy; 2026 Perfect Stack. All rights reserved.</p>
+    </footer>
 
 </body>
 

@@ -105,8 +105,12 @@ class Game {
         this.finalScoreElement = document.getElementById('final-score');
         this.startBtn = document.getElementById('start-btn');
         this.restartBtn = document.getElementById('restart-btn');
+        this.homeBtn = document.getElementById('home-btn');
         this.perfectMessage = document.getElementById('perfect-message');
         this.gameContainer = document.getElementById('game-container');
+        this.finalScoreEl = document.getElementById('final-score');
+
+        // Grab all theme pills globally from anywhere in the DOM
         this.themePills = document.querySelectorAll('.theme-pill');
 
         this.audio = new AudioController();
@@ -150,10 +154,17 @@ class Game {
         document.body.className = `theme-${themeName}`;
         // Update game-container background image class
         this.gameContainer.className = `bg-${themeName}`;
-        // Update pill active states
+
+        // Update ALL pill active states instantly regardless of which one was clicked
+        this.themePills = document.querySelectorAll('.theme-pill'); // Re-query just to be safe
         this.themePills.forEach(pill => {
             pill.classList.toggle('active', pill.dataset.theme === themeName);
         });
+
+        // Redraw blocks if we are in game over mode so the background/stack live-updates
+        if (this.gameState === 'GAMEOVER') {
+            this.draw();
+        }
     }
 
     initEventListeners() {
@@ -181,18 +192,33 @@ class Game {
         this.themePills.forEach(pill => {
             pill.addEventListener('click', (e) => {
                 e.stopPropagation();
+                // We do not want to remove game-over modal, just live change theme
                 this.applyTheme(pill.dataset.theme);
+                pill.blur(); // Fixes bug where Spacebar triggers the pill instead of dropping a block
             });
         });
 
         this.startBtn.addEventListener('click', () => {
+            this.startBtn.blur();
             if (this.audio.ctx.state === 'suspended') this.audio.ctx.resume();
             this.start();
         });
 
         this.restartBtn.addEventListener('click', () => {
+            this.restartBtn.blur();
             if (this.audio.ctx.state === 'suspended') this.audio.ctx.resume();
             this.start();
+        });
+
+        this.homeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.homeBtn.blur();
+            this.gameOverScreen.classList.remove('active');
+            this.startScreen.classList.add('active');
+
+            // Clear out old game state visually
+            this.blocks = [];
+            this.draw();
         });
     }
 
